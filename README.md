@@ -2,3 +2,4 @@
 
 Personal portfolio. Content lives in `config.js`.
 
+Link: https://gautrangg.github.io/

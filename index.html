@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lê Thành Công</title>
+<meta name="description" content="Lê Thành Công — backend developer working in Node.js and TypeScript. Open to fresher / junior roles.">
+<meta property="og:title" content="Lê Thành Công">
+<meta property="og:description" content="Backend developer · Node.js & TypeScript. I build things people actually use.">
+<meta property="og:image" content="https://gautrangg.github.io/avatar.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%231a1a1a'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='34' fill='%23fafaf9' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: profile split. A fixed identity column on the left (photo, name, contact), a calm reading column on the right. */
+:root {
+  --bg: #fafaf9;
+  --panel: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #71716e;
+  --line: #e7e7e4;
+  --chip: #f1f1ef;
+  --inv-bg: #1a1a1a;
+  --inv-fg: #fafaf9;
+  --f-serif: "Newsreader", Georgia, serif;
+  --f-sans: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e0e0e; --panel: #151515; --fg: #ececea; --muted: #9b9b97; --line: #262626; --chip: #1d1d1d;
+    --inv-bg: #ececea; --inv-fg: #0e0e0e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e0e0e; --panel: #151515; --fg: #ececea; --muted: #9b9b97; --line: #262626; --chip: #1d1d1d;
+  --inv-bg: #ececea; --inv-fg: #0e0e0e; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.layout { max-width: 1160px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); }
+
+aside { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 56px; display: grid; gap: 22px; }
+.avatar { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; display: block; border: 1px solid var(--line); }
+.name { font-family: var(--f-serif); font-weight: 500; font-size: 2.5rem; line-height: 1.05; letter-spacing: -.02em; margin: 0; }
+.role { color: var(--muted); margin: 6px 0 0; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; justify-self: start; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: #22a45d; }
+.side-nav { display: grid; gap: 2px; margin-top: 4px; }
+.side-nav a { text-decoration: none; color: var(--muted); font-size: 14px; display: flex; align-items: center; gap: 12px; padding: 4px 0; }
+.side-nav a::before { content: ""; width: 18px; height: 1px; background: currentColor; transition: width .25s; }
+.side-nav a:hover, .side-nav a.on { color: var(--fg); }
+.side-nav a:hover::before, .side-nav a.on::before { width: 40px; }
+.contact-box { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; }
+.mail { font-family: var(--f-mono); font-size: 13px; user-select: all; word-break: break-all; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { font: 500 13px var(--f-sans); text-decoration: none; border-radius: 999px; padding: 7px 14px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
+.btn:hover { border-color: var(--fg); }
+.btn.solid { background: var(--inv-bg); color: var(--inv-fg); border-color: var(--inv-bg); }
+.meta { font-family: var(--f-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+main { padding-block: 56px 80px; min-width: 0; }
+section + section { margin-top: 84px; }
+.k { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+.lede { font-family: var(--f-serif); font-size: clamp(1.7rem, 3vw, 2.35rem); line-height: 1.25; letter-spacing: -.015em; margin: 0; text-wrap: pretty; }
+.lede em { font-style: italic; color: var(--muted); }
+.about { color: var(--muted); max-width: 60ch; margin-top: 18px; }
+
+.proj { display: grid; grid-template-columns: 1fr auto; gap: 6px 20px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); text-decoration: none; transition: border-color .2s, transform .2s; }
+.proj + .proj { margin-top: 12px; }
+a.proj:hover { border-color: var(--fg); transform: translateY(-1px); }
+.proj h3 { margin: 0; font-family: var(--f-serif); font-weight: 500; font-size: 1.45rem; letter-spacing: -.01em; }
+.proj p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 15px; }
+.proj .chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { font-family: var(--f-mono); font-size: 11.5px; padding: 3px 9px; border-radius: 6px; background: var(--chip); }
+.badge { align-self: center; font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--chip); }
+.badge.live { background: var(--inv-bg); color: var(--inv-fg); }
+.proj.reserved { background: transparent; border-style: dashed; }
+.proj.reserved h3 { color: var(--muted); font-style: italic; }
+
+.xp { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 20px; }
+.xp .when { font-family: var(--f-mono); font-size: 12px; color: var(--muted); padding-top: 5px; }
+.xp h3 { margin: 0; font-size: 1.1rem; font-weight: 600; }
+.xp h3 span { color: var(--muted); font-weight: 400; }
+.xp ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+.xp li + li { margin-top: 4px; }
+
+.stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.stack h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+.stack ul { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: 15px; }
+.stack li { padding: 4px 0; }
+
+.log { font-family: var(--f-mono); font-size: 13px; border-left: 1px solid var(--line); padding-left: 18px; }
+.log div { position: relative; padding: 6px 0; }
+.log div::before { content: ""; position: absolute; left: -22px; top: 15px; width: 7px; height: 7px; border-radius: 50%; background: var(--fg); }
+.log .h { color: var(--muted); margin-right: 10px; }
+.off { font-family: var(--f-serif); font-style: italic; font-size: 1.35rem; line-height: 1.45; margin: 0; max-width: 48ch; }
+
+footer { color: var(--muted); font-size: 13px; margin-top: 84px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 0; }
+  aside { position: static; padding-block: 40px 0; }
+  .side-nav { display: none; }
+  main { padding-top: 48px; }
+}
+@media (max-width: 560px) {
+  .stack { grid-template-columns: 1fr; }
+  .xp { grid-template-columns: 1fr; gap: 4px; }
+  .proj { grid-template-columns: 1fr; }
+  .badge { justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } a.proj:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside>
+    <img class="avatar" id="photo" alt="">
+    <div>
+      <h1 class="name" id="name"></h1>
+      <p class="role" id="role"></p>
+    </div>
+    <span class="status"><i aria-hidden="true"></i><span id="status"></span></span>
+    <nav class="side-nav" aria-label="Sections">
+      <a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#stack">Stack</a><a href="#log">Build log</a>
+    </nav>
+    <div class="contact-box">
+      <span class="mail" id="mail"></span>
+      <div class="row"><button class="btn solid" id="copyBtn" type="button">Copy email</button><span class="row" id="links"></span></div>
+      <div class="row" style="justify-content: space-between; align-items: center;">
+        <span class="meta"><span id="city"></span> · <span id="clock">--:--</span></span>
+        <button class="btn" id="themeBtn" type="button">Dark</button>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <p class="k">About</p>
+      <p class="lede">I build things <em>people actually use</em>, one small product at a time.</p>
+      <p class="about" id="intro"></p>
+    </section>
+    <section id="work"><p class="k" id="workK">Work</p><div id="projects"></div></section>
+    <section id="experience"><p class="k">Experience</p><div id="xp"></div></section>
+    <section id="stack"><p class="k">Stack</p><div class="stack" id="stackGrid"></div></section>
+    <section id="log"><p class="k">Build log</p><div class="log" id="logList"></div></section>
+    <section><p class="k">Off the keyboard</p><p class="off" id="off"></p></section>
+    <footer id="foot"></footer>
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script>
+const C = window.CONFIG, P = window.PF, $ = (id) => document.getElementById(id);
+$("photo").src = C.avatar; $("photo").alt = "Portrait of " + C.name;
+$("name").textContent = C.name;
+$("role").textContent = C.role;
+$("status").textContent = C.status;
+$("mail").textContent = C.email;
+$("links").innerHTML = C.links.map(l => '<a class="btn" href="' + P.esc(l.href) + '" target="_blank" rel="noopener">' + P.esc(l.label) + " ↗</a>").join("");
+$("city").textContent = C.city;
+$("intro").textContent = C.intro;
+const live = C.projects.filter(p => p.status === "live").length, building = C.projects.filter(p => p.status === "building").length;
+$("workK").textContent = "Work · " + live + " live · " + building + " building";
+$("projects").innerHTML = C.projects.map(p => {
+  const inner = "<h3>" + P.esc(p.title) + '</h3><span class="badge ' + p.status + '">' + P.stateLabel[p.status] + "</span><p>" + P.esc(p.desc) + "</p>" + (p.stack.length ? '<div class="chips">' + p.stack.map(s => '<span class="chip">' + P.esc(s) + "</span>").join("") + "</div>" : "");
+  return p.href ? '<a class="proj" href="' + P.esc(p.href) + '" target="_blank" rel="noopener">' + inner + "</a>" : '<div class="proj ' + p.status + '">' + inner + "</div>";
+}).join("");
+$("xp").innerHTML = C.experience.map(x => '<div class="xp"><span class="when">' + P.esc(x.when) + "</span><div><h3>" + P.esc(x.role) + " <span>· " + P.esc(x.org) + "</span></h3><ul>" + x.points.map(p => "<li>" + P.esc(p) + "</li>").join("") + "</ul></div></div>").join("");
+$("stackGrid").innerHTML = C.stack.map(s => "<div><h3>" + P.esc(s.group) + "</h3><ul>" + s.items.map(i => "<li>" + P.esc(i) + "</li>").join("") + "</ul></div>").join("");
+$("logList").innerHTML = C.log.map(l => '<div><span class="h">' + P.esc(l.hash) + "</span>" + P.esc(l.msg) + "</div>").join("");
+$("off").textContent = C.offKeyboard;
+$("foot").textContent = "© " + new Date().getFullYear() + " " + C.name;
+P.clock($("clock"), C.timeZone);
+P.copy($("copyBtn"), C.email, "Copy email");
+P.theme($("themeBtn"), "pf-profile-theme");
+
+// Highlight the section in view
+const links = [...document.querySelectorAll(".side-nav a")];
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+}), { rootMargin: "-40% 0px -55% 0px" });
+document.querySelectorAll("main section[id]").forEach(s => io.observe(s));
+</script>
+</body>
+</html>

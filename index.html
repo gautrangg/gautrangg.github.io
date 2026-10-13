@@ -70,17 +70,28 @@ section + section { margin-top: 84px; }
 .lede em { font-style: italic; color: var(--muted); }
 .about { color: var(--muted); max-width: 60ch; margin-top: 18px; }
 
-.proj { display: grid; grid-template-columns: 1fr auto; gap: 6px 20px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); text-decoration: none; transition: border-color .2s, transform .2s; }
-.proj + .proj { margin-top: 12px; }
-a.proj:hover { border-color: var(--fg); transform: translateY(-1px); }
-.proj h3 { margin: 0; font-family: var(--f-serif); font-weight: 500; font-size: 1.45rem; letter-spacing: -.01em; }
-.proj p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 15px; }
-.proj .chips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.proj { display: grid; gap: 14px; padding: clamp(20px, 3vw, 30px); border: 1px solid var(--line); border-radius: 18px; background: var(--panel); transition: border-color .25s; }
+.proj + .proj { margin-top: 16px; }
+.proj:hover { border-color: color-mix(in srgb, var(--fg) 40%, var(--line)); }
+.proj-top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.proj-no { font-family: var(--f-mono); font-size: 12px; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; font-variant-numeric: tabular-nums; }
+.proj-ctx { font-family: var(--f-mono); font-size: 12px; color: var(--muted); flex: 1; min-width: 0; }
+.proj h3 { margin: 4px 0 0; font-family: var(--f-serif); font-weight: 500; font-size: clamp(1.6rem, 2.6vw, 2rem); line-height: 1.1; letter-spacing: -.015em; text-wrap: balance; }
+.proj-sum { margin: 0; color: var(--muted); font-size: 16px; max-width: 62ch; }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-family: var(--f-mono); font-size: 12px; padding: 12px 14px; background: var(--bg); border: 1px dashed var(--line); border-radius: 10px; }
+.flow span { white-space: nowrap; }
+.flow i { font-style: normal; color: var(--muted); }
+.proj-hl { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.proj-hl li { position: relative; padding-left: 22px; font-size: 15px; max-width: 66ch; }
+.proj-hl li::before { content: ""; position: absolute; left: 0; top: .78em; width: 12px; height: 1px; background: var(--muted); }
+.proj-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { font-family: var(--f-mono); font-size: 11.5px; padding: 3px 9px; border-radius: 6px; background: var(--chip); }
-.badge { align-self: center; font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--chip); }
+.proj-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.proj-links a { font-size: 14px; font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 1px; transition: border-color .2s; }
+.proj-links a:hover { border-color: var(--fg); }
+.badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--chip); }
 .badge.live { background: var(--inv-bg); color: var(--inv-fg); }
-.proj.reserved { background: transparent; border-style: dashed; }
-.proj.reserved h3 { color: var(--muted); font-style: italic; }
 
 .xp { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 20px; }
 .xp .when { font-family: var(--f-mono); font-size: 12px; color: var(--muted); padding-top: 5px; }
@@ -94,10 +105,6 @@ a.proj:hover { border-color: var(--fg); transform: translateY(-1px); }
 .stack ul { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: 15px; }
 .stack li { padding: 4px 0; }
 
-.log { font-family: var(--f-mono); font-size: 13px; border-left: 1px solid var(--line); padding-left: 18px; }
-.log div { position: relative; padding: 6px 0; }
-.log div::before { content: ""; position: absolute; left: -22px; top: 15px; width: 7px; height: 7px; border-radius: 50%; background: var(--fg); }
-.log .h { color: var(--muted); margin-right: 10px; }
 .off { font-family: var(--f-serif); font-style: italic; font-size: 1.35rem; line-height: 1.45; margin: 0; max-width: 48ch; }
 
 footer { color: var(--muted); font-size: 13px; margin-top: 84px; border-top: 1px solid var(--line); padding-top: 18px; }
@@ -111,10 +118,9 @@ footer { color: var(--muted); font-size: 13px; margin-top: 84px; border-top: 1px
 @media (max-width: 560px) {
   .stack { grid-template-columns: 1fr; }
   .xp { grid-template-columns: 1fr; gap: 4px; }
-  .proj { grid-template-columns: 1fr; }
-  .badge { justify-self: start; }
+  .proj-ctx { flex-basis: 100%; order: 3; }
 }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } a.proj:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -128,7 +134,7 @@ footer { color: var(--muted); font-size: 13px; margin-top: 84px; border-top: 1px
     </div>
     <span class="status"><i aria-hidden="true"></i><span id="status"></span></span>
     <nav class="side-nav" aria-label="Sections">
-      <a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#stack">Stack</a><a href="#log">Build log</a>
+      <a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#stack">Stack</a>
     </nav>
     <div class="contact-box">
       <span class="mail" id="mail"></span>
@@ -149,7 +155,6 @@ footer { color: var(--muted); font-size: 13px; margin-top: 84px; border-top: 1px
     <section id="work"><p class="k" id="workK">Work</p><div id="projects"></div></section>
     <section id="experience"><p class="k">Experience</p><div id="xp"></div></section>
     <section id="stack"><p class="k">Stack</p><div class="stack" id="stackGrid"></div></section>
-    <section id="log"><p class="k">Build log</p><div class="log" id="logList"></div></section>
     <section><p class="k">Off the keyboard</p><p class="off" id="off"></p></section>
     <footer id="foot"></footer>
   </main>
@@ -166,15 +171,22 @@ $("mail").textContent = C.email;
 $("links").innerHTML = C.links.map(l => '<a class="btn" href="' + P.esc(l.href) + '" target="_blank" rel="noopener">' + P.esc(l.label) + " ↗</a>").join("");
 $("city").textContent = C.city;
 $("intro").textContent = C.intro;
-const live = C.projects.filter(p => p.status === "live").length, building = C.projects.filter(p => p.status === "building").length;
-$("workK").textContent = "Work · " + live + " live · " + building + " building";
-$("projects").innerHTML = C.projects.map(p => {
-  const inner = "<h3>" + P.esc(p.title) + '</h3><span class="badge ' + p.status + '">' + P.stateLabel[p.status] + "</span><p>" + P.esc(p.desc) + "</p>" + (p.stack.length ? '<div class="chips">' + p.stack.map(s => '<span class="chip">' + P.esc(s) + "</span>").join("") + "</div>" : "");
-  return p.href ? '<a class="proj" href="' + P.esc(p.href) + '" target="_blank" rel="noopener">' + inner + "</a>" : '<div class="proj ' + p.status + '">' + inner + "</div>";
-}).join("");
+$("workK").textContent = "Work · " + C.projects.length + " projects";
+$("projects").innerHTML = C.projects.map((p, i) =>
+  '<article class="proj">' +
+    '<div class="proj-top"><span class="proj-no">' + String(i + 1).padStart(2, "0") + "</span>" +
+    '<span class="proj-ctx">' + P.esc(p.context) + " · " + P.esc(p.year) + "</span>" +
+    '<span class="badge ' + p.status + '">' + P.stateLabel[p.status] + "</span></div>" +
+    "<h3>" + P.esc(p.title) + "</h3>" +
+    '<p class="proj-sum">' + P.esc(p.summary) + "</p>" +
+    (p.flow ? '<div class="flow" aria-label="How it fits together">' + p.flow.map(f => "<span>" + P.esc(f) + "</span>").join('<i aria-hidden="true">→</i>') + "</div>" : "") +
+    '<ul class="proj-hl">' + p.highlights.map(h => "<li>" + P.esc(h) + "</li>").join("") + "</ul>" +
+    '<div class="proj-foot"><div class="chips">' + p.stack.map(s => '<span class="chip">' + P.esc(s) + "</span>").join("") + "</div>" +
+    '<div class="proj-links">' + p.links.map(l => '<a href="' + P.esc(l.href) + '" target="_blank" rel="noopener">' + P.esc(l.label) + " ↗</a>").join("") + "</div></div>" +
+  "</article>"
+).join("");
 $("xp").innerHTML = C.experience.map(x => '<div class="xp"><span class="when">' + P.esc(x.when) + "</span><div><h3>" + P.esc(x.role) + " <span>· " + P.esc(x.org) + "</span></h3><ul>" + x.points.map(p => "<li>" + P.esc(p) + "</li>").join("") + "</ul></div></div>").join("");
 $("stackGrid").innerHTML = C.stack.map(s => "<div><h3>" + P.esc(s.group) + "</h3><ul>" + s.items.map(i => "<li>" + P.esc(i) + "</li>").join("") + "</ul></div>").join("");
-$("logList").innerHTML = C.log.map(l => '<div><span class="h">' + P.esc(l.hash) + "</span>" + P.esc(l.msg) + "</div>").join("");
 $("off").textContent = C.offKeyboard;
 $("foot").textContent = "© " + new Date().getFullYear() + " " + C.name;
 P.clock($("clock"), C.timeZone);

@@ -12,11 +12,41 @@ window.CONFIG = {
     { label: "GitHub", href: "https://github.com/gautrangg" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/c%C3%B4ng-l%C3%AA-14580129a/" }
   ],
-  // status: "live" | "building" | "reserved"
+  // status: "live" | "done" | "building"
   projects: [
-    { title: "Product 01", desc: "In development. Shipping in public, follow the build log.", stack: ["Node.js", "TypeScript", "PostgreSQL"], status: "building", year: "2026", href: "" },
-    { title: "Next product", desc: "This slot is waiting for a real product with real users.", stack: [], status: "reserved", year: "—", href: "" },
-    { title: "Next product", desc: "This slot is waiting for a real product with real users.", stack: [], status: "reserved", year: "—", href: "" }
+    {
+      title: "Full-stack app on Azure Kubernetes",
+      context: "MindX internship project",
+      year: "2025 — 2026",
+      status: "done",
+      summary: "A React and Express application taken from local setup to a production deployment on Azure, with real sign-in and monitoring.",
+      flow: ["Users", "HTTPS · cert-manager", "Nginx Ingress", "React / Express API", "OpenID Connect"],
+      highlights: [
+        "Built a React + Vite frontend and an Express + TypeScript API, with sign-in through the MindX OpenID Connect identity provider.",
+        "Containerised both services with Docker and deployed them to Azure Kubernetes Service behind an Nginx Ingress, with HTTPS from Let's Encrypt.",
+        "Added production monitoring: Azure Application Insights on frontend and backend, Google Analytics 4 events, and 4 alert rules."
+      ],
+      stack: ["TypeScript", "React", "Express", "Docker", "Kubernetes (AKS)", "OpenID Connect", "App Insights"],
+      links: [{ label: "Source on GitHub", href: "https://github.com/gautrangg/fullstack-mindx" }]
+    },
+    {
+      title: "This portfolio",
+      context: "Personal project",
+      year: "2026",
+      status: "live",
+      summary: "A hand-built, framework-free personal site. All content lives in one config file, so adding a project is a one-line change.",
+      flow: ["config.js", "Static HTML · CSS · JS", "GitHub Pages"],
+      highlights: [
+        "Designed and built from scratch with no framework: responsive layout, light and dark themes, and a sticky profile column.",
+        "Content is separated from layout in a single config file, which also powers three alternative templates.",
+        "Deployed on GitHub Pages with link previews for LinkedIn, Facebook and Zalo."
+      ],
+      stack: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+      links: [
+        { label: "Live site", href: "https://gautrangg.github.io" },
+        { label: "Source on GitHub", href: "https://github.com/gautrangg/gautrangg.github.io" }
+      ]
+    }
   ],
   experience: [
     {
@@ -31,21 +61,18 @@ window.CONFIG = {
     }
   ],
   stack: [
-    { group: "Backend", items: ["Node.js", "TypeScript", "Express", "REST APIs", "JWT"] },
-    { group: "Data", items: ["PostgreSQL", "SQL Server", "Database design"] },
-    { group: "Also", items: ["C# / .NET", "Git", "Docker basics", "AI-assisted workflow"] }
+    { group: "Backend", items: ["Node.js", "TypeScript", "Express", "REST APIs", "OpenID Connect / JWT"] },
+    { group: "Cloud & DevOps", items: ["Docker", "Kubernetes (AKS)", "Azure", "Nginx Ingress", "Git"] },
+    { group: "Also", items: ["React", "PostgreSQL", "SQL Server", "C# / .NET"] }
   ],
-  offKeyboard: "Gym and martial arts most days of the week. Same approach to code: small reps, every day.",
-  log: [
-    { hash: "a1f3c9e", date: "2026-10-13", msg: "init: portfolio shell, slots reserved for real products" }
-  ]
+  offKeyboard: "Gym and martial arts most days of the week. Same approach to code: small reps, every day."
 };
 
 /* Small helpers shared by every version */
 window.PF = {
   esc: (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])),
   initials: (n) => { const p = n.split(/\s+/).filter(Boolean); return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase(); },
-  stateLabel: { live: "Live", building: "Building", reserved: "Open slot" },
+  stateLabel: { live: "Live", done: "Completed", building: "Building", reserved: "Open slot" },
   clock: (el, tz) => {
     const tick = () => { try { el.textContent = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: tz }).format(new Date()); } catch (e) {} };
     tick(); setInterval(tick, 20000);
